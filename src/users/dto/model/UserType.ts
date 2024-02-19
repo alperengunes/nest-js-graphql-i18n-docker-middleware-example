@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { PaginationResultType } from '../../../lib/model/PaginationResultType';
 
 @ObjectType()
 export class UserType {
@@ -25,19 +26,4 @@ export class UserType {
 }
 
 @ObjectType()
-export class PaginationResultType {
-  @Field()
-  total: number;
-
-  @Field()
-  page: number;
-
-  @Field()
-  limit: number;
-
-  @Field()
-  pageTotal: number;
-
-  @Field(() => [UserType])
-  results: UserType[];
-}
+export class UserPaginationResultType extends PaginationResultType(UserType) {}
