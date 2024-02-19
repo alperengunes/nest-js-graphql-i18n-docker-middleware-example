@@ -39,3 +39,12 @@ services:
       - '5050:80'
     depends_on:
       - db
+
+  apollo:
+    build: .
+    restart: always
+    container_name: apollo-server
+    ports:
+      - '4000:4000'
+    depends_on:
+      - db

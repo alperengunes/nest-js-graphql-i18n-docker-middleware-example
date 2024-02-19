@@ -1,5 +1,5 @@
 import {
-  IsEmail, IsNotEmpty, IsString
+  IsEmail, IsNotEmpty, IsOptional, IsString
 } from 'class-validator';
 
 export class UpdateUserDto {
@@ -11,7 +11,7 @@ export class UpdateUserDto {
   @IsEmail()
   email: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   password: string;
 }

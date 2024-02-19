@@ -3,8 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
-import { BlogModule } from './blog/blog.module';
 import { ConfigModule } from '@nestjs/config';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
 @Module({
   imports: [
@@ -21,9 +22,14 @@ import { ConfigModule } from '@nestjs/config';
       migrationsTableName: 'custom_migration_table',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
     }),
-    UsersModule,
-    BlogModule,
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      playground: true,
+      autoSchemaFile: true,
+    }),
+    UsersModule
   ],
+  //
   controllers: [AppController],
   providers: [AppService],
 })
