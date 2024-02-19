@@ -7,7 +7,7 @@ import { ConfigModule  } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { AuthModule } from './auth/auth.module';
-import { I18nModule, AcceptLanguageResolver, QueryResolver, HeaderResolver, CookieResolver } from 'nestjs-i18n';
+import { I18nModule, AcceptLanguageResolver } from 'nestjs-i18n';
 import { join } from 'path';
 
 
