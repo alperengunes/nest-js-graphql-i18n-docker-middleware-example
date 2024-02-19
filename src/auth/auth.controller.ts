@@ -8,6 +8,6 @@ export class AuthController {
 
     @Post('login')
     async login(@I18nLang() lang: string = "en", @Body() signInDto: SignInDto) {
-        return this.i18n.t('login.loginMessage', { lang });
+        return "Login";
     }
 }
