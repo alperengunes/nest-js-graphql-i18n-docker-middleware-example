@@ -1,6 +1,15 @@
 {
-    "users":{
-        "EmailExists":"Email kullanılmakta",
-        "BadRequest" :"Hatalı istek"
+    "users": {
+        "emailExists": "Bu e-posta adresi zaten kullanılmakta",
+        "noRecord": "Kayıt bulunamadı",
+        "created": "Kullanıcı başarıyla oluşturuldu",
+        "userNotFound": "Kullanıcı bulunamadı",
+        "userDeleted": "Kullanıcı başarıyla silindi",
+        "userUpdated": "Kullanıcı başarıyla güncellendi"
+    },
+    "general": {
+        "success": "Başarılı",
+        "badRequest": "Hatalı istek",
+        "noRecord": "Kayıt bulunamadı"
     }
 }

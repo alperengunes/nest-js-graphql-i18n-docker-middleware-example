@@ -1,6 +1,15 @@
 {
-    "users":{
-        "EmailExists":"Email already exists",
-        "BadRequest" :"Bad Request"
+    "users": {
+        "emailExists": "Email already exists",
+        "noRecord": "No record found",
+        "created": "User created successfully",
+        "userNotFound": "User not found",
+        "userDeleted": "User deleted successfully",
+        "userUpdated": "User updated"
+    },
+    "general": {
+        "success": "Success",
+        "badRequest": "Bad Request",
+        "noRecord": "No Record Found"
     }
 }
