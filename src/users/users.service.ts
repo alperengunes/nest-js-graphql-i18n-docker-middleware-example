@@ -4,7 +4,6 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ResponseJsonUtils } from '../lib/utils/response-json';
-import * as bcrypt from 'bcrypt';
 import { ResponseJson } from 'src/lib/types/ResponseJson';
 import { InjectRepository } from '@nestjs/typeorm';
 import { messageKeys } from './message/message-key';
@@ -19,18 +18,11 @@ export class UsersService {
     private readonly responseJsonUtils: ResponseJsonUtils,
   ) { }
 
-  async hashPassword(password: string): Promise<string> {
-    const salt = await bcrypt.genSalt();
-    return bcrypt.hash(password, salt);
-  }
-
   async create(createUserDto: CreateUserDto, lang: string): Promise<ResponseJson<User | string[]>> {
     const findOneByEmail = await this.findOneByEmail(createUserDto.email);
     if (findOneByEmail) {
       return this.responseJsonUtils.response(null, [messageKeys.emailExists], generalKeys.badRequest, 422, lang);
     }
-    const hashedPassword = await this.hashPassword(createUserDto.password);
-    createUserDto.password = hashedPassword;
     const userData = this.usersRepository.create(createUserDto);
     const user = await this.usersRepository.save(userData);
     return this.responseJsonUtils.response(user, [messageKeys.created], generalKeys.success, 200, lang);
@@ -44,9 +36,6 @@ export class UsersService {
     }
     if (emailExists && emailExists.id != id) {
       return this.responseJsonUtils.response(null, [messageKeys.emailExists], generalKeys.badRequest, 422, lang);
-    }
-    if (updateUserDto.password) {
-      updateUserDto.password = await this.hashPassword(updateUserDto.password);
     }
     await this.usersRepository.update(id, updateUserDto);
     const userData = await this.usersRepository.findOne({ where: { id } });

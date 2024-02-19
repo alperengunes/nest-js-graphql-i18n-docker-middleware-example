@@ -4,7 +4,9 @@ import {
   DeleteDateColumn,
   Entity,
   UpdateDateColumn,
+  BeforeInsert
 } from 'typeorm';
+import * as bcrypt from 'bcrypt';
 
 @Entity()
 export class User {
@@ -28,4 +30,11 @@ export class User {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @BeforeInsert()
+  async hashPassword() {
+    const salt = await bcrypt.genSalt();
+    const hash = await bcrypt.hash(this.password, salt);
+    this.password = hash;
+  }
 }
