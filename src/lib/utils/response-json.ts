@@ -15,13 +15,13 @@ export class ResponseJsonUtils {
                     message[index] = messageContext as string;
                 }
             });
+        }
 
-            return {
-                data: data,
-                message: message,
-                error: this.i18n.translate(error, { lang }),
-                statusCode: statusCode
-            }
+        return {
+            data: data,
+            message: message,
+            error: this.i18n.translate(error, { lang }),
+            statusCode: statusCode
         }
     }
 }

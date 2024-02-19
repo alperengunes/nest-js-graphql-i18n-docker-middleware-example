@@ -24,7 +24,6 @@ import { join } from 'path';
         },
       }),
       resolvers: [
-        new HeaderResolver(["accept-language"]),
         AcceptLanguageResolver,
       ],
     }),
