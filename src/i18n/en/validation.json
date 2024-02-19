@@ -1,0 +1,6 @@
+{
+    "users":{
+        "EmailExists":"Email already exists",
+        "BadRequest" :"Bad Request"
+    }
+}

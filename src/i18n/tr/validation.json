@@ -1,0 +1,6 @@
+{
+    "users":{
+        "EmailExists":"Email kullanılmakta",
+        "BadRequest" :"Hatalı istek"
+    }
+}

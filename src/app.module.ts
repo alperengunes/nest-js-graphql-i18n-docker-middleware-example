@@ -3,13 +3,31 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule  } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { AuthModule } from './auth/auth.module';
+import { I18nModule, AcceptLanguageResolver, QueryResolver, HeaderResolver, CookieResolver } from 'nestjs-i18n';
+import { join } from 'path';
+
+
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    I18nModule.forRootAsync({
+      useFactory: () => ({
+        fallbackLanguage: "en",
+        loaderOptions: {
+          path: join("src/i18n/"),
+          watch: true,
+        },
+      }),
+      resolvers: [
+        new HeaderResolver(["accept-language"]),
+        AcceptLanguageResolver,
+      ],
+    }),
     TypeOrmModule.forRoot({
       type: process.env.DB_TYPE as any,
       host: process.env.DB_HOST,
@@ -27,7 +45,8 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
       playground: true,
       autoSchemaFile: true,
     }),
-    UsersModule
+    UsersModule,
+    AuthModule
   ],
   //
   controllers: [AppController],
